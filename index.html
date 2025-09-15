@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #f9f9f9;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Overlay Background */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .success-box {
+      position: relative;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      border: 1px solid #eee;
+      text-align: center;
+      animation: popupScale 0.4s ease;
+      overflow: hidden; /* Confetti box ke andar hi rahega */
+    }
+
+    @keyframes popupScale {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #28a745;
+      position: relative;
+      z-index: 2;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #333;
+      line-height: 1.5;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: #000; /* Black button */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      z-index: 2;
+      text-decoration: none;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      transition: left 0.6s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .success-box {
+        padding: 25px 20px;
+      }
+      h1 { font-size: 1.6rem; }
+      p { font-size: 0.9rem; }
+      .btn { padding: 10px 22px; font-size: 0.9rem; }
+    }
+
+    /* 🎉 Confetti Animation */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110%) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay with Popup -->
+  <div class="overlay" id="overlay">
+    <div class="success-box" id="successBox">
+      <h1>✅ Payment Successful</h1>
+      <p>Your payment has been received successfully.<br>
+         Click the button below to download your file.</p>
+      <a href="https://drive.google.com/file/d/1b1hzt6owAkgZ2zzjM52MJHDCbmM9yEiz/view?usp=drive_link" target="_blank" class="btn">
+         Download Now
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // 🎉 Confetti inside success-box only
+    function createConfetti() {
+      const box = document.getElementById("successBox");
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+
+      // Random color
+      confetti.style.backgroundColor =
+        ["#ff0", "#0f0", "#0ff", "#f0f", "#f00", "#00f"][Math.floor(Math.random() * 6)];
+
+      // Random horizontal position (inside box)
+      confetti.style.left = Math.random() * box.clientWidth + "px";
+
+      // Random size
+      confetti.style.width = confetti.style.height = Math.random() * 8 + 5 + "px";
+
+      // Random duration
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+      box.appendChild(confetti);
+
+      // Remove after animation
+      setTimeout(() => confetti.remove(), 5000);
+    }
+
+    // Generate confetti for few seconds
+    let interval = setInterval(createConfetti, 150);
+    setTimeout(() => clearInterval(interval), 5000);
+
+    // Optional: close popup when overlay is clicked
+    document.getElementById("overlay").addEventListener("click", (e) => {
+      if(e.target.id === "overlay"){
+        document.getElementById("overlay").style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>
