@@ -2,185 +2,228 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Successful</title>
+  <title>Resume Data Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: #f9f9f9;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Overlay Background */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .success-box {
-      position: relative;
       background: #fff;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      width: 100%;
-      border: 1px solid #eee;
+      color: #111;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .form-container {
+      max-width: 650px;
+      margin: 25px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px #eee;
+      padding: 1.5rem;
+    }
+    h2 {
       text-align: center;
-      animation: popupScale 0.4s ease;
-      overflow: hidden; /* Confetti box ke andar hi rahega */
+      margin-bottom: 5px;
+      color: #111;
+      border-bottom: 1.5px solid #111;
+      padding-bottom: 6px;
+      letter-spacing: 1px;
     }
-
-    @keyframes popupScale {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    h1 {
-      font-size: 2rem;
+    .note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #444;
       margin-bottom: 15px;
-      color: #28a745;
-      position: relative;
-      z-index: 2;
+      line-height: 1.4;
     }
-
-    p {
-      font-size: 1rem;
-      margin-bottom: 30px;
-      color: #333;
-      line-height: 1.5;
-      position: relative;
-      z-index: 2;
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
     }
-
-    .btn {
-      position: relative;
-      display: inline-block;
-      padding: 12px 30px;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #fff;
-      background: #000; /* Black button */
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform 0.2s ease;
-      z-index: 2;
-      text-decoration: none;
-    }
-
-    .btn::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
+    input, select, textarea {
       width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.6);
-      transition: left 0.6s ease;
+      border: 1px solid #111;
+      border-radius: 6px;
+      padding: 9px;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      background: #fff;
+      transition: border 0.2s;
     }
-
-    .btn:hover::before {
-      left: 100%;
+    input:focus, textarea:focus, select:focus {
+      border: 1.5px solid #000;
     }
-
-    .btn:hover {
-      transform: scale(1.05);
+    .sem-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .success-box {
-        padding: 25px 20px;
-      }
-      h1 { font-size: 1.6rem; }
-      p { font-size: 0.9rem; }
-      .btn { padding: 10px 22px; font-size: 0.9rem; }
+    input[type="submit"] {
+      background: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 12px 0;
+      border-radius: 8px;
+      margin-top: 18px;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
-
-    /* 🎉 Confetti Animation */
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: red;
-      top: -10px;
-      animation: fall linear forwards;
-      z-index: 1;
+    input[type="submit"]:hover {
+      background: #333;
     }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110%) rotate(360deg);
-        opacity: 0;
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
+  <div class="form-container">
+    <h2>Resume Data Form</h2>
+    <p class="note">If you are unsure about what to fill in any field, you may leave it blank. Our team will review it and collect the necessary information during consultation.</p>
 
-  <!-- Overlay with Popup -->
-  <div class="overlay" id="overlay">
-    <div class="success-box" id="successBox">
-      <h1>✅ Payment Successful</h1>
-      <p>Your payment has been received successfully.<br>
-         Click the button below to download your file.</p>
-      <a href="https://drive.google.com/file/d/1BuSfzZ8pA49wjGrEKgN_ym-C6cfOZ5YU/view?usp=drive_link" target="_blank" class="btn">
-         Download Now
-      </a>
-    </div>
+    
+    <form id="resumeForm">
+
+      <!-- Required Fields -->
+      <label for="name">Name <span style="color:red">*</span></label>
+      <input type="text" id="name" required>
+
+      <label for="phone">Phone <span style="color:red">*</span></label>
+      <input type="text" id="phone" required>
+
+      <!-- Optional Fields -->
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob">
+
+      <label for="gender">Gender</label>
+      <select id="gender">
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+
+      <label for="father">Father's Name</label>
+      <input type="text" id="father">
+
+      <label for="mother">Mother's Name</label>
+      <input type="text" id="mother">
+
+      <label for="foccupation">Father's Occupation</label>
+      <input type="text" id="foccupation">
+
+      <label for="address">Full Address</label>
+      <textarea id="address" rows="2"></textarea>
+
+      <label for="email">Email</label>
+      <input type="email" id="email">
+
+      <label for="blood">Blood Group</label>
+      <input type="text" id="blood">
+
+      <label for="marital">Marital Status</label>
+      <input type="text" id="marital">
+
+      <label for="language">Languages Known</label>
+      <input type="text" id="language">
+
+      <label for="nationality">Nationality</label>
+      <input type="text" id="nationality">
+
+      <!-- Education -->
+      <label for="10class">Class 10th (Board, School, Year, Percentage)</label>
+      <input type="text" id="10class">
+
+      <label for="12class">Class 12th (Board, School, Year, Percentage)</label>
+      <input type="text" id="12class">
+
+      <label>Pursuing Diploma/Degree (Institute)</label>
+      <input type="text" id="diplomainstitute">
+
+      <!-- Semester SGPA only -->
+      <label for="semester">Semester-wise SGPA</label>
+      <div class="sem-row">
+        <input type="number" step="0.01" id="sem1sgpa" placeholder="Sem 1 SGPA">
+        <input type="number" step="0.01" id="sem2sgpa" placeholder="Sem 2 SGPA">
+        <input type="number" step="0.01" id="sem3sgpa" placeholder="Sem 3 SGPA">
+        <input type="number" step="0.01" id="sem4sgpa" placeholder="Sem 4 SGPA">
+        <input type="number" step="0.01" id="sem5sgpa" placeholder="Sem 5 SGPA">
+        <input type="number" step="0.01" id="sem6sgpa" placeholder="Sem 6 SGPA">
+      </div>
+
+      <!-- Training & Skills -->
+      <label for="training">Technical Training (Org, Course, Period)</label>
+      <textarea id="training"></textarea>
+
+      <label for="hobbies">Hobbies</label>
+      <textarea id="hobbies"></textarea>
+
+      <label for="skills">Soft Skills</label>
+      <textarea id="skills"></textarea>
+
+      <label for="strengths">Strengths</label>
+      <textarea id="strengths"></textarea>
+
+      <label for="declaration">Declaration</label>
+      <textarea id="declaration"></textarea>
+
+      <input type="submit" value="Send to WhatsApp">
+    </form>
   </div>
 
   <script>
-    // 🎉 Confetti inside success-box only
-    function createConfetti() {
-      const box = document.getElementById("successBox");
-      const confetti = document.createElement("div");
-      confetti.classList.add("confetti");
+    document.getElementById('resumeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-      // Random color
-      confetti.style.backgroundColor =
-        ["#ff0", "#0f0", "#0ff", "#f0f", "#f00", "#00f"][Math.floor(Math.random() * 6)];
+      // Collect data
+      var data = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        dob: document.getElementById('dob').value,
+        gender: document.getElementById('gender').value,
+        father: document.getElementById('father').value,
+        mother: document.getElementById('mother').value,
+        foccupation: document.getElementById('foccupation').value,
+        address: document.getElementById('address').value,
+        email: document.getElementById('email').value,
+        blood: document.getElementById('blood').value,
+        marital: document.getElementById('marital').value,
+        language: document.getElementById('language').value,
+        nationality: document.getElementById('nationality').value,
+        tenth: document.getElementById('10class').value,
+        twelfth: document.getElementById('12class').value,
+        diplomainstitute: document.getElementById('diplomainstitute').value,
+        sgpa: [],
+        training: document.getElementById('training').value,
+        hobbies: document.getElementById('hobbies').value,
+        skills: document.getElementById('skills').value,
+        strengths: document.getElementById('strengths').value,
+        declaration: document.getElementById('declaration').value
+      };
 
-      // Random horizontal position (inside box)
-      confetti.style.left = Math.random() * box.clientWidth + "px";
-
-      // Random size
-      confetti.style.width = confetti.style.height = Math.random() * 8 + 5 + "px";
-
-      // Random duration
-      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-
-      box.appendChild(confetti);
-
-      // Remove after animation
-      setTimeout(() => confetti.remove(), 5000);
-    }
-
-    // Generate confetti for few seconds
-    let interval = setInterval(createConfetti, 150);
-    setTimeout(() => clearInterval(interval), 5000);
-
-    // Optional: close popup when overlay is clicked
-    document.getElementById("overlay").addEventListener("click", (e) => {
-      if(e.target.id === "overlay"){
-        document.getElementById("overlay").style.display = "none";
+      // Collect semester SGPA only
+      for(let i=1;i<=6;i++){
+        data.sgpa.push(document.getElementById(`sem${i}sgpa`).value);
       }
+
+      var whatsappNumber = "+9153950552"; // replace with your WhatsApp number
+
+      var message = 
+        `Name: ${data.name}%0aPhone: ${data.phone}%0aDOB: ${data.dob}%0aGender: ${data.gender}%0aFather: ${data.father}%0aMother: ${data.mother}%0aFather's Occupation: ${data.foccupation}%0aAddress: ${data.address}%0aEmail: ${data.email}%0aBlood Group: ${data.blood}%0aMarital: ${data.marital}%0aLanguage: ${data.language}%0aNationality: ${data.nationality}%0a10th: ${data.tenth}%0a12th: ${data.twelfth}%0aDiploma/Institute: ${data.diplomainstitute}%0a` +
+        '---Semesters SGPA---%0a' +
+        data.sgpa.map((s,i)=>`Sem${i+1} SGPA: ${s}`).join('%0a') +
+        `%0aTechnical Training: ${data.training}%0aHobbies: ${data.hobbies}%0aSoft Skills: ${data.skills}%0aStrengths: ${data.strengths}%0aDeclaration: ${data.declaration}`;
+
+      var url;
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        url = 'whatsapp://send?phone=' + whatsappNumber + '&text=' + message;
+      } else {
+        url = 'https://web.whatsapp.com/send?phone=' + whatsappNumber + '&text=' + message;
+      }
+      window.open(url, '_blank');
     });
   </script>
-
 </body>
 </html>
